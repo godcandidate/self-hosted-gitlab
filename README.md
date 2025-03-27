@@ -86,13 +86,14 @@ Login with the root credentials specified in the `docker-compose.yml`.
 1. Generate a new ssh key
 
 ```sh
-ssh-keygen -t rsa -b 4096 -C "your-email@example.com"
+
+ssh-keygen -t rsa -b 4096 -C "your-email@example.com" -f ~/.ssh/id_rsa_gitlab
 ```
 
 2. Copy the ssh key and add to Gitlab
 
 ```sh
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa_gitlab
 ```
 3. Add SSH Key to GitLab
 - Go to GitLab.
@@ -116,7 +117,7 @@ Host gitlab-server
   HostName localhost  # Replace with gitlabIP
   User git
   Port 2222
-  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/..ssh/id_rsa_gitlab
   IdentitiesOnly yes
 
 ```
