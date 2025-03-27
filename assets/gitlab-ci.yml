@@ -1,0 +1,15 @@
+stages:
+  - test
+
+default:
+  tags:
+    - docker-in-docker
+  image: alpine:latest  # Use a lightweight Alpine Linux image
+
+simple-test:
+  stage: test
+  script:
+    - echo "Hello, this is a simple CI/CD pipeline!"
+    - echo "Running a basic command in the Alpine container..."
+    - uname -a  # Display system information
+    - whoami    # Check the current user
