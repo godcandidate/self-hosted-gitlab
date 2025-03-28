@@ -131,10 +131,9 @@ Add the GitLab Runner service to your `docker-compose.yml`:
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
     container_name: gitlab-runner
-    network_mode: 'host'
+    network_mode: 'network_mode'   # a separate network for docker server and dnd to communicate
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./gitlab-runner/config:/etc/gitlab-runner
 ```
 
 Restart your setup:
@@ -143,17 +142,34 @@ docker-compose up -d
 ```
 
 ### Step 2: Register GitLab Runner
-Register the runner using the following command:
-```sh
-docker exec -it gitlab-runner gitlab-runner register
-```
-Provide the following details during registration:
-- **GitLab instance URL:** `http://localhost:8000/`
-- **Token:** *(Find this in GitLab UI: `Settings > CI/CD > Runners`)*
-- **Executor:** `docker`
-- **Default Image:** `alpine:latest`
+1. Add a runner in your project
+- Go to your project settings and select CI/CD
+- Select Runner and choose New project runner
+- Give tag name( this will be used as a reference in your pipeline) and a description
+- Create the runner and copy the command from `STEP 1` in Gitlab UI
 
-Verify the runner is active in GitLab UI under `Settings > CI/CD > Runners`.
+example ```sh
+gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7Uki1G7gcc
+```
+
+2. Register your runner (we will use docker-in-docker executor)
+- Enter the gitlab-runner container
+```sh
+docker compose exec -it gitlab-runner /bin/bash
+```
+- Register your runner with the codes you copied from `STEP 1`, add docker privilege and docker volumes tag
+```
+gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7Uki1G7gcc
+--docker-privileged --docker-volumes "/certs/client"
+```
+
+- Follw the next prompts to register 
+```
+  name of runner: docker-in-docker(same as gitlab GUI runner name)
+  default image: docker:28.0.2 (any image of your choice)
+```
+
+- Verify the runner is active in GitLab UI under `Settings > CI/CD > Runners`.
 
 ---
 
