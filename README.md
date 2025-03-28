@@ -148,7 +148,8 @@ docker-compose up -d
 - Give tag name( this will be used as a reference in your pipeline) and a description
 - Create the runner and copy the command from `STEP 1` in Gitlab UI
 
-example ```sh
+example 
+```sh
 gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7Uki1G7gcc
 ```
 
@@ -158,6 +159,7 @@ gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7
 docker compose exec -it gitlab-runner /bin/bash
 ```
 - Register your runner with the codes you copied from `STEP 1`, add docker privilege and docker volumes tag
+
 ```
 gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7Uki1G7gcc
 --docker-privileged --docker-volumes "/certs/client"
