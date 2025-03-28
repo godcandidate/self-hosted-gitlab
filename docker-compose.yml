@@ -11,9 +11,13 @@ services:
         external_url 'http://localhost:8000'
         nginx['listen_port'] = 8000
         gitlab_rails['gitlab_shell_ssh_port'] = 2222 
+        gitlab_rails['registry_enabled'] = true
+        registry_external_url 'http://localhost:5001'
+
     ports:
       - '8000:8000'
       - '2222:22'    # SSH (Host 2222 → Container 22)
+      - '5001:5001' # expose new port for registry hosting
     volumes: # persists gitlab configs and data
       - ./gitlab/config:/etc/gitlab
       - ./gitlab/data:/var/opt/gitlab
@@ -26,6 +30,7 @@ services:
     network_mode: 'host'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - ./gitlab-runner/config:/etc/gitlab-runner
 
       
 networks: # a separate network for docker server and dnd to communicate

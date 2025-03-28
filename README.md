@@ -131,7 +131,7 @@ Add the GitLab Runner service to your `docker-compose.yml`:
   gitlab-runner:
     image: gitlab/gitlab-runner:alpine
     container_name: gitlab-runner
-    network_mode: 'network_mode'   # a separate network for docker server and dnd to communicate
+    network_mode: 'host'   
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 ```
