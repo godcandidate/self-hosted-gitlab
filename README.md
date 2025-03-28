@@ -1,4 +1,4 @@
-# 🚀 Setting Up a Self-Hosted GitLab with a Runner and CI/CD Pipeline
+# Setting Up a Self-Hosted GitLab with a Runner and CI/CD Pipeline
 
 This guide will walk you through setting up a **self-hosted GitLab instance** using Docker Compose, configuring a **GitLab Runner**, and setting up a **CI/CD pipeline**. By the end of this guide, you’ll have a fully functional GitLab environment with automated pipelines.
 
@@ -199,8 +199,9 @@ Add `clone_url` and update network settings `network_mode`:
 ...
     network_mode = "gitlab-in-docker" # your bridge network
 ...
-Restart the GitLab Runner:
+
 ```
+Restart the GitLab Runner:
 ```sh
 docker restart gitlab-runner
 ```
