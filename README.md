@@ -168,6 +168,7 @@ gitlab-runner register  --url http://localhost:8000  --token glrt-t3_snZzntHFpN7
 - Follw the next prompts to register 
 ```
   name of runner: docker-in-docker(same as gitlab GUI runner name)
+  executor-name: docker
   default image: docker:28.0.2 (any image of your choice)
 ```
 
