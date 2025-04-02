@@ -188,11 +188,11 @@ nano /etc/gitlab-runner/config.toml
 
 Add or update the following:
 ```toml
-//some codes
+# some codes
 [[runners]]
   name = "Docker in Docker Runner"
   clone_url = "http://gitlab-server:8000" # Replace with the GitLab server container name
-//some codes  
+# some codes  
   [runners.docker]
     network_mode = "gitlab-in-docker" # Your bridge network
 ```
