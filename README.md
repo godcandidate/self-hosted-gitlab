@@ -154,6 +154,7 @@ docker-compose up -d
      gitlab-runner register --url http://localhost:8000 --token <YOUR_TOKEN>
      ```
    - Follow the prompts:
+     - name: docker-in-docker(use the tag name from the Gitlab - optional)
      - Executor: `docker`
      - Default Docker image: `docker:28.0.2`
 
@@ -187,9 +188,11 @@ nano /etc/gitlab-runner/config.toml
 
 Add or update the following:
 ```toml
+//some codes
 [[runners]]
   name = "Docker in Docker Runner"
   clone_url = "http://gitlab-server:8000" # Replace with the GitLab server container name
+//some codes  
   [runners.docker]
     network_mode = "gitlab-in-docker" # Your bridge network
 ```
