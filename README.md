@@ -149,9 +149,10 @@ docker-compose up -d
      ```sh
      docker compose exec -it gitlab-runner /bin/bash
      ```
-   - Run the registration command:
+   - Run the registration command and add docker privilege and volumes:
      ```sh
      gitlab-runner register --url http://localhost:8000 --token <YOUR_TOKEN>
+     --docker-privileged --docker-volumes "/certs/client"
      ```
    - Follow the prompts:
      - name: docker-in-docker(use the tag name from the Gitlab - optional)
